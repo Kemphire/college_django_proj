@@ -15,8 +15,8 @@ class Profile(models.Model):
 
         img = Image.open(self.image.path) # open the image that you want to resize
 
-        if img.width or img.height > 300:
-            output_size = 200,200
+        if img.width != 250 or img.height != 250:
+            output_size = 250,250
             img.thumbnail(output_size)
             img.save(self.image.path)
 
