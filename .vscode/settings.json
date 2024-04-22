@@ -1,0 +1,6 @@
+{
+    "files.exclude": {
+      "**/*.ini": true
+    }
+  }
+  
