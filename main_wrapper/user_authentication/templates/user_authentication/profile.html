@@ -4,13 +4,23 @@
 <!-- remember that user variable is not something that you need to pass in the context it is preset for the current user in django -->
     <div class="content-section">
         <div class="media">
-            <img class="rounded-circle account-img" style="" height="200" width="200" src="{{ user.profile.image.url }}" alt="profile_image">
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" alt="profile_image">
             <div class="media-body">
                 <h2 class="account-heading">{{ user.username }}</h2>
                 <p class="text-secondary">{{ user.email }}</p>
                 <p style="font-style: italic" class="text-secondary">{{ user.profile.bio }}</p>
             </div>
         </div>
-        <!-- FORM HERE -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Customize your profile</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        </form>
     </div>
 {% endblock main %}
