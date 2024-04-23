@@ -38,6 +38,7 @@ def new_post_create(request):
         form = PostCreationForm()
     return render(request,"blog/post_creation_form.html",{'form':form})
 
+@login_required(redirect_field_name='login')
 def post_edit(request,pk):
     post = Post.objects.filter(pk=pk).first()
     previous_title = Post.objects.get(pk=pk).title
@@ -48,9 +49,10 @@ def post_edit(request,pk):
             messages.success(request,f"Post \'{previous_title}\' got changed!")
             return redirect('post-detail',post.pk)
     else:
-        form = PostEditForm()
+        form = PostEditForm(instance=post)
     return render(request,"blog/post_edit_form.html",{'form':form})
 
+@login_required(redirect_field_name='login')
 def post_delete(request,pk):
     post = Post.objects.filter(pk=pk).first()
     previous_title = Post.objects.get(pk=pk).title

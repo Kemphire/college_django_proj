@@ -8,7 +8,7 @@ class Profile(models.Model):
     bio = models.CharField(max_length=250,default="A veteran of this application")
     
     def __str__(self) -> str:
-        return f"Profile of {self.user.username}."
+        return f"Profile of -> {self.user.username}."
     
     def save(self) -> None: # for adding our own save method for this class (my goal is to automatically resize the images)
         super().save()  # there exist a save method in the superior class also we want that to first run then our one
@@ -19,4 +19,6 @@ class Profile(models.Model):
             output_size = 250,250
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+
 
