@@ -4,6 +4,7 @@ from django.contrib import messages
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from .forms import PostCreationForm, PostEditForm
+from django.urls import reverse
 
 
 def welcome(request):
@@ -42,15 +43,22 @@ def new_post_create(request):
 def post_edit(request,pk):
     post = Post.objects.filter(pk=pk).first()
     previous_title = Post.objects.get(pk=pk).title
-    if request.method == 'POST':
-        form = PostEditForm(request.POST,instance=post)
-        if form.is_valid():
-            form.save()
-            messages.success(request,f"Post \'{previous_title}\' got changed!")
-            return redirect('post-detail',post.pk)
+    if post.author == request.user:
+        if request.method == 'POST':
+            form = PostEditForm(request.POST,instance=post)
+            if form.is_valid():
+                form.save()
+                messages.success(request,f"Post \'{previous_title}\' got changed!")
+                return redirect('post-detail',post.pk)
+            else:
+                messages.warning(request,f"Error in editing the form!")
+                return redirect('post-detail',post.pk)
+        else:
+            form = PostEditForm(instance=post)
+        return render(request,"blog/post_edit_form.html",{'form':form})
     else:
-        form = PostEditForm(instance=post)
-    return render(request,"blog/post_edit_form.html",{'form':form})
+        messages.warning(request,f"No permission to change this post")
+        return redirect('post-detail',pk=post.pk)
 
 @login_required(redirect_field_name='login')
 def post_delete(request,pk):
@@ -61,5 +69,8 @@ def post_delete(request,pk):
         messages.success(request,f"Post with title \'{previous_title}\' got deleted!")
         return redirect('blog-home')
     return redirect(request,"blog/post_delete_confirmation.html",{'post':post})
+
+
+
 
 
