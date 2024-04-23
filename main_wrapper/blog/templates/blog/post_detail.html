@@ -9,7 +9,8 @@
           </div>
           <h2 class="article-title">{{ post.title }}</h2>
           <p class="article-content">{{post.contents}}</p>
-          <button type="button" class="btn btn-warning">Edit</button>
+          <a href="{% url 'post-edit' post.pk %}" ><button type="button" class="btn btn-warning">Edit</button></a>
+          <a href="{% url 'post-delete' post.pk %}" ><button type="button" class="btn btn-danger">Delete</button></a>
         </div>
       </article>
 {% endblock main %}
