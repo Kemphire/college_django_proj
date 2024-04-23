@@ -19,7 +19,7 @@ def about(request):
 def post_detail(request,pk):
     context = {
         'post':Post.objects.filter(pk=pk).first(),
-        'title':f'Detail of {pk}',
+        'title':f'Detail of {pk}\' post',
     }
     return render(request,'blog/post_detail.html',context)
 
@@ -32,8 +32,8 @@ def new_post_create(request):
             post.author = request.user
             post.save()
             title_of_post = form.cleaned_data.get('title')
-            messages.success(request,f"Post with title = {title_of_post} created!")
-            return redirect('blog-home')
+            messages.success(request,f"Post with title '{title_of_post}' created sucessfully!")
+            return redirect('post-detail',post.pk)
     else:
         form = PostCreationForm()
     return render(request,"blog/post_creation_form.html",{'form':form})
