@@ -63,12 +63,18 @@ def post_edit(request,pk):
 @login_required(redirect_field_name='login')
 def post_delete(request,pk):
     post = Post.objects.filter(pk=pk).first()
-    previous_title = Post.objects.get(pk=pk).title
-    if request.method == 'POST':
+    title = Post.objects.get(pk=pk).title
+    if post.author == request.user:
         post.delete()
-        messages.success(request,f"Post with title \'{previous_title}\' got deleted!")
+        messages.success(request,f"Post with title \'{title}\' got deleted!")
         return redirect('blog-home')
-    return redirect(request,"blog/post_delete_confirmation.html",{'post':post})
+    else:
+        messages.warning(request,"you are not the owner of the post! kindly refrain from doing this!")
+        return redirect('post-detail',pk=post.pk)
+    
+@login_required(redirect_field_name='login')
+def profile_view(request,pk):
+    ...
 
 
 
