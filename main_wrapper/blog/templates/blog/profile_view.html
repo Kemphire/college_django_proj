@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block main %}
+<!-- remember that user variable is not something that you need to pass in the context it is preset for the current user in django -->
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" alt="profile_image">
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+                <p style="font-style: italic" class="text-secondary">{{ user.profile.bio }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock main %}

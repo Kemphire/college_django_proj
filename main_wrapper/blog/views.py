@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .models import Post
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .forms import PostCreationForm, PostEditForm
 from django.urls import reverse
 
@@ -73,9 +74,10 @@ def post_delete(request,pk):
         return redirect('post-detail',pk=post.pk)
     
 @login_required(redirect_field_name='login')
-def profile_view(request,pk):
-    ...
-
+def profile_view(request,username):
+    user = User.objects.get(username=username)
+    return render(request,"blog/profile_view.html",{'user':user})
+    
 
 
 

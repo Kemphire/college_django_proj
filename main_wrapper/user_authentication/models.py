@@ -10,8 +10,8 @@ class Profile(models.Model):
     def __str__(self) -> str:
         return f"Profile of -> {self.user.username}."
     
-    def save(self) -> None: # for adding our own save method for this class (my goal is to automatically resize the images)
-        super().save()  # there exist a save method in the superior class also we want that to first run then our one
+    def save(self,*args, **kwargs) -> None: # for adding our own save method for this class (my goal is to automatically resize the images)
+        super().save(*args, **kwargs)  # there exist a save method in the superior class also we want that to first run then our one
 
         img = Image.open(self.image.path) # open the image that you want to resize
 
