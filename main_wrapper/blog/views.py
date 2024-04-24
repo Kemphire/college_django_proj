@@ -5,12 +5,21 @@ from .models import Post
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import PostCreationForm, PostEditForm
-from django.urls import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def welcome(request):
+    posts_list = Post.objects.filter().order_by("-date_posted")
+    page_num = request.GET.get('page',1)
+    paginated = Paginator(posts_list,10)
+    try:
+        posts = paginated.page(page_num)
+    except PageNotAnInteger:
+        posts = paginated.page(1)
+    except EmptyPage:
+        posts = paginated.page(paginated.num_pages)
     context = {
-        'posts':Post.objects.filter().order_by("-date_posted"),
+        'posts':posts,
         'title':'Home'
     }
     return render(request,'blog/home.html',context)
