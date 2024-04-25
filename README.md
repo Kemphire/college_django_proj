@@ -10,6 +10,7 @@ python manage.py runserver
 - if you followed the above steps then congratulation you have successfully ran my project locally and you have directory structure such like below
 
 ## Tree after cloning repo
+```
 .
 ├── main_wrapper
 │   ├── blog
@@ -153,3 +154,4 @@ python manage.py runserver
 │       ├── tests.py
 │       └── views.py
 └── requirements.txt
+```
