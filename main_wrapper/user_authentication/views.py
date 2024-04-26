@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect   
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
@@ -43,3 +46,10 @@ def profile(request):
 @login_required
 def logout_view(request):
     return render(logout(request),'user_authentication/logout.html')
+
+class ResetPasswordView(PasswordResetView,SuccessMessageMixin):
+    template_name = "user_authentication/passwd_reset.html"
+    email_template_name = "user_authentication/passwd_reset_email.html"
+    subject_template_name = "user_authentication/passwd_reset_subject.html"
+    success_message = "An email send to you with the detailed instruction, with a link to reset your password\nFeel free to contact with us if you feel that you are not able to change it"
+    success_url = reverse_lazy('blog-home')

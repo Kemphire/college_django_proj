@@ -7,19 +7,16 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Welcome Back</legend>
+                <legend class="border-bottom mb-4">Password Reset</legend>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Login</button>
+                <button class="btn btn-outline-info" type="submit">Submit the request</button>
             </div>
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
-                New to us, Join now <a class="ml-2" href="{% url 'register' %}"><i>Sign Up</i></a>
-            </small>
-            <small class="text-muted float-right">
-                Forgot your Password<a class="ml-2" href="{% url 'password-reset' %}"><i>Click here</i></a>
+                Remember the Password then click here! <a class="ml-2" href="{% url 'login' %}">Log In</a>
             </small>
         </div>
     </div>
