@@ -19,8 +19,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_view
-from django.contrib.auth.views import logout_then_login
-from user_authentication import views as user_view
+from django.contrib.auth.views import logout_then_login, PasswordResetConfirmView
+from user_authentication import views as user_view  
 
 urlpatterns = [
     path('',include("blog.url")),
@@ -29,7 +29,8 @@ urlpatterns = [
     path('profile/',user_view.profile,name= 'profile'),
     path('login/',auth_view.LoginView.as_view(template_name="user_authentication/login.html"),name= 'login'),
     path('logout/',user_view.logout_view,name = 'logout'),  
-    path('password_rest/',user_view.ResetPasswordView.as_view(),name="password-reset")
+    path('password_rest/',user_view.ResetPasswordView.as_view(),name="password-reset"),
+    path('password-rest-confirm/<uibd64>/<token>/',PasswordResetConfirmView.as_view(template_name = "user_authentication/password_reset_confirmation.html"),name="password-reset-confirm")
 ]
 
 if settings.DEBUG:

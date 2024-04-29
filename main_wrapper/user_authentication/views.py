@@ -50,6 +50,6 @@ def logout_view(request):
 class ResetPasswordView(PasswordResetView,SuccessMessageMixin):
     template_name = "user_authentication/passwd_reset.html"
     email_template_name = "user_authentication/passwd_reset_email.html"
-    subject_template_name = "user_authentication/passwd_reset_subject.html"
+    subject_template_name = "user_authentication/passwd_reset_subject"
     success_message = "An email send to you with the detailed instruction, with a link to reset your password\nFeel free to contact with us if you feel that you are not able to change it"
     success_url = reverse_lazy('blog-home')
