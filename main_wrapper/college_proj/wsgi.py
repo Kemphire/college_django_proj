@@ -1,5 +1,5 @@
 """
-WSGI config for corey_proj project.
+WSGI config for college_proj project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'corey_proj.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'college_proj.settings')
 
 application = get_wsgi_application()

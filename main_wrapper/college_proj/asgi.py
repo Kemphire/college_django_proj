@@ -1,5 +1,5 @@
 """
-ASGI config for corey_proj project.
+ASGI config for college_proj project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'corey_proj.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'college_proj.settings')
 
 application = get_asgi_application()
