@@ -36,9 +36,9 @@
                 <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
                 {% else %}
                 <a class="nav-item nav-link" href="{% url 'post-creation' %}">New Post</a>
-                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                <a class="nav-item nav-link" title="Profile" href="{% url 'profile' %}"><img class="rounded-circle article-img ml-2" src="{{ user.profile.image.url }}" style="height: 30px; width: 30px;"></a>
                 <a class="nav-item nav-link" method="post" href="{% url 'logout' %}">Logout</a>
-                {% endif %}
+                {% endif %}   
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@
           <div class="col-md-4">
             <div class="content-section">
               <h3>Our Sidebar</h3>
-              <p class='text-muted'>You can put any information here you'd like.
+              <p class='text-muted'>If we make this functional then this will enhance the functionaliy of our site to next level
                 <ul class="list-group">
                   <li class="list-group-item list-group-item-action">Latest Posts</li>
                   <li class="list-group-item list-group-item-action">Announcements</li>
