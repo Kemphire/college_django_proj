@@ -36,7 +36,9 @@
                 <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
                 {% else %}
                 <a class="nav-item nav-link" href="{% url 'post-creation' %}">New Post</a>
-                <a class="nav-item nav-link" title="Profile" href="{% url 'profile' %}"><img class="rounded-circle article-img ml-2" src="{{ user.profile.image.url }}" style="height: 30px; width: 30px;"></a>
+                <a class="nav-item nav-link" title="Profile" href="{% url 'profile' %}">
+                  <img class="rounded-circle article-img ml-2" src="{{ user.profile.image.url }}" style="height: 30px; width: 30px;">
+                </a>
                 <a class="nav-item nav-link" method="post" href="{% url 'logout' %}">Logout</a>
                 {% endif %}   
               </div>
